@@ -1,11 +1,24 @@
-__author__ = 'charlie'
-#import the csv engine
 import csv
-#give meal.csv the name f from nkw on
-with open('meal.csv') as f:
-    #assign f_csv variable as an iteration over the lines given in the csvfile
-    f_csv = csv.reader(f)
-    #assign a headers variable which calls the next line everytime it is called
-    # unneccesary as of now headers = next(f_csv)
-    for row in f_csv:
+
+__author__ = 'charlie'
+
+breakfast = raw_input("what do you want to eat for breakfast? ")
+
+lunch = raw_input("what do you want to eat for lunch? ")
+
+dinner = raw_input("what do you want to eat for dinner? ")
+
+with open('meal.csv', 'wb') as csvFile:
+    mealWriter = csv.writer(csvFile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    mealWriter.writerow(['Breakfast'] + [breakfast])
+    mealWriter.writerow(['Lunch'] + [lunch])
+    mealWriter.writerow(['Dinner'] + [dinner])
+
+with open('meal.csv', 'rb') as guy:
+    mealReader = csv.reader(guy, delimiter=',', quotechar='|')
+    for row in mealReader:
         print row[1]
+
+
+
+
